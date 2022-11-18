@@ -1,0 +1,25 @@
+@use "sass:math"
+
+@import "../../styles/sizes"
+@import "../../styles/colors"
+
+.container
+	$duration: 3s + random() * 1s
+	background-color: rgba($color-secondary, .5)
+	animation: FadeGrey $duration ease-in-out infinite
+	padding: $padding
+
+	&.text
+		border-radius: 0
+	&.rect
+		border-radius: $radius
+	&.circle
+		border-radius: 50%
+
+@keyframes FadeGrey
+	0%
+		background-color: rgba($color-secondary, .5)
+	50%
+		background-color: rgba($color-grey, .5)
+	100%
+		background-color: rgba($color-secondary, .5)
