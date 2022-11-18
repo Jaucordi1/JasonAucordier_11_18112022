@@ -1,0 +1,27 @@
+@import "../../styles/functions"
+@import "../../styles/colors"
+
+.container
+	gap: spacing(5)
+
+	.header
+		user-select: none
+		justify-content: center
+		align-items: center
+		border-radius: 25px
+		color: $color-white
+		font-size: $heading1
+		background:
+			color: $color-black
+			image: url("../../assets/banner.png")
+			repeat: no-repeat
+			blend-mode: darken
+			size: 100% 100%
+
+	.locationCards
+		justify-content: stretch
+		grid-gap: spacing(5)
+
+		.locationCard
+			aspect-ratio: 1/1
+			border-radius: $radius
