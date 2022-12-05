@@ -1,25 +1,40 @@
-import {Column}   from "../../components/column/Column";
-import {Skeleton} from "../../components/skeleton/Skeleton";
-import styles     from "./HomePage.module.sass";
-import {Grid}     from "../../components/grid/Grid";
+import classes         from "./HomePage.module.sass";
+import {useIsMobile}   from "../../hooks/useIsMobile";
+import {Routes}        from "../../Router";
+import {useLoaderData} from "react-router-dom";
+import React           from "react";
+
+import type {ILogement} from "../../models/logement/ILogement";
+
+const Link = React.lazy(() => import("../../components/link/Link"));
+const Carousel = React.lazy(() => import("../../components/carousel"));
+const LogementCard = React.lazy(() => import("../../components/logements/Card"));
 
 const HomePage = () => {
-  return (
-      <Column id="home-page" className={styles.container}>
-        <Skeleton height={223} className={styles.header}>
-          Chez vous, partout et ailleurs
-        </Skeleton>
+  const isMobile = useIsMobile();
+  const logements = useLoaderData() as ILogement[];
 
-        <Grid component={Skeleton} width="100%" className={styles.locationCards} areasTemplate={[
-            "card card card",
-        ]}>
-          {(new Array(6).fill(null).map((_, index) => (
-              <Column key={index} component={Skeleton} style={{flexGrow: 1}} className={styles.locationCard}>
-                Titre de la location
-              </Column>
-          )))}
-        </Grid>
-      </Column>
+  const slides = [
+    {
+      title: "Chez vous, partout et ailleurs",
+      image: `${process.env.PUBLIC_URL}/assets/banner${isMobile ? "-mobile" : ""}.png`,
+    }
+  ];
+
+  return (
+      <main id="home-page" className={classes.container}>
+        <Carousel slides={slides} showControls={false} className={classes.banner} dark />
+
+        {logements && (
+            <section id="logements-grid" className={classes.locationCards}>
+              {logements.map((logement, index) => (
+                  <Link key={index} to={Routes.ROOT + Routes.LOGEMENT.replace(":id", logement.id)} className={classes.card}>
+                    <LogementCard logement={logement} />
+                  </Link>
+              ))}
+            </section>
+        )}
+      </main>
   );
 };
 

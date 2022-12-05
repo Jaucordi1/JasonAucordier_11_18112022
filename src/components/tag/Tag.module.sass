@@ -1,0 +1,20 @@
+@import "../../styles/sizes"
+@import "../../styles/colors"
+@import "../../styles/mixins"
+
+.container
+	display: inline-block
+	background-color: $color-primary
+	color: $color-white
+	border-radius: $radius
+	width: fit-content
+	text-align: center
+	@include mobile-only
+		font-size: 10px
+		padding: 0 2em
+	@include tablet-only
+		font-size: 12px
+		padding: 1px 2em
+	@include desktop-only
+		font-size: 14px
+		padding: 3px 2em

@@ -1,0 +1,19 @@
+@import "../../styles/sizes"
+@import "../../styles/mixins"
+
+.container
+	@include column(flex-start, stretch, nowrap, 0)
+	@include mobile-only
+		gap: 20px
+	@include tablet-only
+		gap: 30px
+	@include desktop-only
+		gap: 40px
+
+.banner
+	height: 223px
+
+.content
+	@include column(flex-start, stretch, nowrap, 0)
+	@include tablet
+		padding: 0 5%

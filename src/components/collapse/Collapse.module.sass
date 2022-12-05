@@ -1,0 +1,103 @@
+@use "sass:math"
+@import "../../styles/sizes"
+@import "../../styles/colors"
+@import "../../styles/mixins"
+
+$duration: .3s
+$timing-function: ease
+$padding: 10px
+$padding-collapse: $padding * 2
+
+.container
+	@include tablet
+		$padding: 20px
+	@include column(flex-start, stretch, nowrap, 1, 0)
+	margin-bottom: $padding-collapse
+
+.content
+	@include column(flex-start, stretch, nowrap, 0, 0)
+	font-weight: 400
+	color: $color-primary
+	@include mobile-only
+		@include fontsize(12px)
+	@include tablet
+		@include fontsize(18px)
+	transform-origin: top center
+	transform: translateY(-$padding) scaleY(0)
+	max-height: 0
+	height: 100%
+	transition: max-height $duration $timing-function, padding-top $duration $timing-function, padding-bottom $duration $timing-function, transform $duration $timing-function
+	overflow: hidden
+	background-color: $color-bg-primary
+	border-radius: 0 0 $radius $radius
+	z-index: 1
+	padding: 0 $padding
+
+.open
+	.content
+		transition: max-height $duration $timing-function, padding-top $duration $timing-function, padding-bottom $duration $timing-function, transform $duration $timing-function
+		animation: DisplayCollapse $duration $timing-function
+		display: flex
+		transform: translateY(-$padding) scaleY(1)
+		max-height: 1000px
+		padding:
+			top: $padding-collapse
+			right: $padding
+			bottom: $padding
+			left: $padding
+
+.header
+	@include row(flex-start, center, nowrap, 0)
+	@include mobile-only
+		max-height: 30px
+	color: $color-white
+	background-color: $color-primary
+	padding: math.div($padding, 2) $padding
+	border-radius: $radius
+	cursor: pointer
+	user-select: none
+	z-index: 2
+
+.title
+	@include mobile-only
+		@include fontsize(13px)
+	@include tablet-only
+		@include fontsize(16px)
+	@include desktop-only
+		@include fontsize(18px)
+	flex-grow: 1
+
+.arrow
+	@include tablet-only
+		width: 24px
+		height: 24px
+	@include desktop-only
+		width: 30px
+		height: 30px
+
+
+@keyframes DisplayCollapse
+	0%
+		display: none
+		transform: translateY(-$padding) scaleY(0)
+		max-height: 0
+		padding-top: 0
+		padding-bottom: 0
+	0.01%
+		display: flex
+		transform: translateY(-$padding) scaleY(0)
+		max-height: 0
+		padding-top: 0
+		padding-bottom: 0
+	99.99%
+		display: flex
+		transform: translateY(-$padding) scaleY(1)
+		max-height: 1000px
+		padding-top: $padding-collapse
+		padding-bottom: $padding
+	100%
+		display: none
+		transform: translateY(-$padding) scaleY(1)
+		max-height: 1000px
+		padding-top: $padding-collapse
+		padding-bottom: $padding

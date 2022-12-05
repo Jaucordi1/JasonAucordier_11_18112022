@@ -1,0 +1,28 @@
+@import "../../styles/mixins"
+
+.container
+	font-size: 1em
+	@include column(center, center, nowrap, 0)
+	transition: transform .2s ease
+	transform-origin: center center
+
+.white
+	@include variant("white")
+.grey
+	@include variant("grey")
+.black
+	@include variant("black")
+
+.primary
+	@include variant("primary")
+.bg-primary
+	@include variant("bg-primary")
+.secondary
+	@include variant("secondary")
+
+.success
+	@include variant("success")
+.warning
+	@include variant("warning")
+.error
+	@include variant("error")

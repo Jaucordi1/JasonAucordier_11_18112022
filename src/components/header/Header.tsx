@@ -1,33 +1,40 @@
-import styles     from "./Header.module.sass";
-import {Routes}  from "../../Router";
-import {Skeleton} from "../skeleton/Skeleton";
-import {Row}     from "../row/Row";
-import {NavLink} from "react-router-dom";
-import React      from "react";
+import classes                                 from "./Header.module.sass";
+import {Routes}                                from "../../Router";
+import {Skeleton}                              from "../skeleton/Skeleton";
+import {NavLink, useLocation, useResolvedPath} from "react-router-dom";
+import classnames                              from "classnames";
+import React                                   from "react";
 
 const Logo = React.lazy(() => import("../logo/Logo"));
 
 export const Header = () => {
+  const location = useLocation();
+  const route = useResolvedPath(location.pathname);
+
   return (
-      <Row component="header" id="header" className={styles.container}>
-        <NavLink to={Routes.ROOT} className={styles.homelink}>
+      <header id="header" className={classes.container}>
+        <NavLink to={Routes.ROOT} className={classes.homelink}>
           <React.Suspense fallback={<Skeleton width={211} height={68} />}>
-            <Logo className={styles.logo} />
+            <Logo className={classes.logo} />
           </React.Suspense>
         </NavLink>
 
-        <Row component="ul" className={styles.navigation}>
-          <li className={styles.navlink}>
-            <NavLink to={Routes.HOME} className={styles.link}>
-              Home
+        <ul className={classes.navigation}>
+          <li className={classes.navigationItem}>
+            <NavLink to={Routes.HOME} className={classnames(classes.link, {
+              [classes.current]: route.pathname === (Routes.ROOT + Routes.HOME),
+            })}>
+              Accueil
             </NavLink>
           </li>
-          <li className={styles.navlink}>
-            <NavLink to={Routes.ABOUT} className={styles.link}>
-              À propos
+          <li className={classes.navigationItem}>
+            <NavLink to={Routes.ABOUT} className={classnames(classes.link, {
+              [classes.current]: route.pathname === (Routes.ROOT + Routes.ABOUT),
+            })}>
+              A propos
             </NavLink>
           </li>
-        </Row>
-      </Row>
+        </ul>
+      </header>
   );
 };

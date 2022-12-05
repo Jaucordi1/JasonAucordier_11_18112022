@@ -1,0 +1,106 @@
+@import "../../styles/colors"
+@import "../../styles/mixins"
+
+.container
+	font-size: 1em
+	display: grid
+	width: 100%
+	overflow-x: auto
+	grid-template-areas: "carousel carousel" "title title" "location location" "tags tags" "notation host" "content content"
+	gap: $gap
+	margin-top: 1em
+	@include tablet
+		//@include column(flex-start, stretch, nowrap, 0)
+		grid-template-areas: "carousel carousel carousel carousel" "title title title host" "location location location host" "tags tags tags notation" "content content content content"
+
+.carousel
+	grid-area: carousel
+	@include mobile-only
+		height: 255px
+	@include tablet-only
+		height: 320px
+	@include desktop-only
+		height: 415px
+
+.titleAndLocation, .hostTagsAndNotation
+	@include tablet
+		@include row(flex-start, center, nowrap, 1)
+
+.title
+	grid-area: title
+	@include mobile-only
+		@include fontsize(18px)
+	@include tablet-only
+		@include fontsize(24px)
+	@include desktop-only
+		@include fontsize(36px)
+	color: $color-primary
+	padding: 0
+	margin: 0
+
+.location
+	grid-area: location
+	@include mobile-only
+		@include fontsize(14px)
+	@include tablet-only
+		@include fontsize(16px)
+	@include desktop-only
+		@include fontsize(18px)
+	color: $color-primary
+	font-weight: bold
+
+.host
+	grid-area: host
+	@include row(flex-end, center, nowrap, 1)
+
+	.avatar
+		@include mobile-only
+			width: 32px
+			height: 32px
+		@include tablet-only
+			width: 48px
+			height: 48px
+		@include desktop-only
+			width: 64px
+			height: 64px
+		border-radius: 50%
+		margin-right: .5em
+
+	.name
+		@include column(center, flex-end, nowrap, 0)
+		@include mobile-only
+			@include fontsize(12px)
+		@include tablet-only
+			@include fontsize(15px)
+		@include desktop-only
+			@include fontsize(18px)
+		color: $color-primary
+		text-align: end
+		max-width: 5em
+
+.tags
+	grid-area: tags
+	@include row(flex-start, center, wrap, 1, 10px)
+
+.notation
+	font-size: 15px
+	grid-area: notation
+	@include column(center, flex-start, nowrap, 1)
+	@include tablet
+		justify-self: flex-end
+		flex-shrink: 1
+
+.content
+	grid-area: content
+	@include tablet
+		@include row(stretch, flex-start, nowrap, 0)
+
+		> *
+			width: 100%
+			max-width: 100%
+
+.description
+	grid-area: description
+
+.equipement
+	grid-area: equipement

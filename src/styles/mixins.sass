@@ -1,5 +1,44 @@
-@mixin flexbox()
+@use 'sass:selector'
+@import "sizes"
+@import "colors"
+@import "breakpoints"
+
+// Flexbox
+@mixin flexbox($direction, $justify, $align, $wrap, $grow, $gap)
 	display: flex
-	flex-direction: column
-	flex-grow: 1
+	flex-direction: $direction
+	flex-wrap: $wrap
+	justify-content: $justify
+	align-items: $align
+	gap: $gap
+	flex-grow: $grow
 	min-height: 0
+
+
+// Flexbox shortcuts (column/row)
+@mixin column($justify, $align, $wrap, $grow, $gap: $gap)
+	@include flexbox(column, $justify, $align, $wrap, $grow, $gap)
+@mixin row($justify, $align, $wrap, $grow, $gap: $gap)
+	@include flexbox(row, $justify, $align, $wrap, $grow, $gap)
+
+// Setting line-height with font-size
+@mixin fontsize($size, $lh: $line-height)
+	font-size: $size !important
+	line-height: $lh !important
+
+// Include content only for breakpoints
+@mixin mobile-only()
+	@media all and (max-width: $breakpoint-mobile)
+		@content
+@mixin tablet-only()
+	@media all and (min-width: $breakpoint-tablet-start) and (max-width: $breakpoint-tablet-end)
+		@content
+@mixin tablet()
+	@media all and (min-width: $breakpoint-tablet-start)
+		@content
+@mixin desktop-only()
+	@media all and (min-width: $breakpoint-desktop)
+		@content
+
+@mixin variant($variant: "primary", $attr: color)
+	#{$attr}: map-get($colors, $variant)

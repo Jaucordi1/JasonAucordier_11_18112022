@@ -1,0 +1,52 @@
+@import "../../styles/colors"
+@import "../../styles/mixins"
+
+.container
+	@include mobile-only
+		@include column(space-evenly, center, nowrap, 1)
+	@include tablet-only
+		@include column(space-evenly, center, nowrap, 1)
+	@include desktop-only
+		@include column(space-around, center, nowrap, 1)
+	color: $color-primary
+
+.error
+	@include column(center, center, nowrap, 0)
+	@include mobile-only
+		gap: 10px
+	@include tablet-only
+		gap: 40px
+	@include desktop-only
+		gap: 60px
+	> *
+		margin: 0
+		padding: 0
+
+.code
+	font-weight: 700
+	@include mobile-only
+		@include fontsize(96px, 100%)
+	@include tablet-only
+		@include fontsize(160px, 100%)
+	@include desktop-only
+		@include fontsize(288px, 100%)
+	color: inherit
+
+.message
+	font-weight: 500
+	@include mobile-only
+		@include fontsize(18px, 100%)
+	@include tablet
+		@include fontsize(36px, 100%)
+	text-align: center
+	color: inherit
+
+.links
+	@include column(center, center, nowrap, 0)
+	font-weight: 500
+	@include mobile-only
+		@include fontsize(14px, 100%)
+	@include tablet
+		@include fontsize(18px, 100%)
+	> *
+		color: inherit
