@@ -1,27 +1,64 @@
-@import "../../styles/functions"
+@use "sass:math"
+@import "../../styles/sizes"
 @import "../../styles/colors"
+@import "../../styles/mixins"
 
 .container
-	gap: spacing(5)
+	@include column(flex-start, stretch, nowrap, 0)
+	@include tablet-only
+		gap: 35px
+	@include desktop-only
+		gap: 43px
 
-	.header
-		user-select: none
-		justify-content: center
-		align-items: center
-		border-radius: 25px
-		color: $color-white
-		font-size: $heading1
-		background:
-			color: $color-black
-			image: url("../../assets/banner.png")
-			repeat: no-repeat
-			blend-mode: darken
-			size: 100% 100%
+.locationCards
+	display: grid
+	overflow-x: hidden
+	@include mobile-only
+		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr))
+		gap: 20px
+	@include tablet-only
+		grid-template-columns: repeat(auto-fill, minmax(200px, 1fr))
+		background-color: $color-bg-primary
+		padding: 30px
+		border-radius: $radius * 2
+		gap: 30px
+	@include desktop-only
+		grid-template-columns: repeat(auto-fill, minmax(320px, 1fr))
+		background-color: $color-bg-primary
+		border-radius: $radius * 2
+		padding: 40px
+		gap: 40px
 
-	.locationCards
-		justify-content: stretch
-		grid-gap: spacing(5)
+.card
+	text-decoration: none
+	&:hover
+		text-decoration: none !important
+	width: 100%
 
-		.locationCard
-			aspect-ratio: 1/1
-			border-radius: $radius
+.error
+	font-size: 1em
+	color: $color-error
+
+.banner
+	height: 100%
+	@include mobile-only
+		max-height: 111px
+		p
+			@include fontsize(24px, 100%)
+			left: $padding !important
+			right: $padding !important
+			transform: translateY(-50%) !important
+			max-width: 217px !important
+	@include tablet
+		max-height: 223px
+		p
+			@include fontsize(24px)
+			max-width: none !important
+			margin: 0 auto !important
+			width: fit-content !important
+			position: relative !important
+			left: auto !important
+			transform: translateY(-50%) !important
+	@include desktop-only
+		p
+			@include fontsize(48px)

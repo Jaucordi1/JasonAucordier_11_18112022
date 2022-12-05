@@ -1,30 +1,43 @@
+@import "../../styles/mixins"
+@import "../../styles/sizes"
 @import "../../styles/colors"
 
 .container
-	justify-content: space-between
-	align-items: center
-	margin-top: 40px
+	@include row(space-between, stretch, nowrap, 0)
 
-	.homelink
-		color: $color-primary
+.homelink
+	@include column(center, flex-start, nowrap, 0, 0)
+	flex-shrink: 1
+	color: $color-primary
 
-		.logo
-			height: 62px
-			user-select: none
+.navigation
+	@include row(flex-end, center, nowrap, 0)
+	list-style-type: none
+	margin: 0
+	padding: 0
 
-	.navigation
-		list-style-type: none
-		gap: 57px
+.navigationItem
 
-		.navlink
-			.link
-				user-select: none
-				text-decoration: none
-				color: $color-primary
-				font-family: Montserrat, sans-serif
-				font-size: 24px
-				text-align: right
-				font-weight: 500
+.logo
+	user-select: none
+	@include mobile-only
+		width: 145px
+		height: 47px
+	@include desktop-only
+		width: 210.32px
+		height: 68px
 
-				&:hover
-					text-decoration: underline
+.link
+	text-decoration: none
+	color: $color-primary
+	font-family: Montserrat, sans-serif
+	text-align: right
+	font-weight: 500
+	&:is(:hover, .current)
+		text-decoration: underline !important
+	@include mobile-only
+		@include fontsize(12px)
+		font-variant: all-small-caps
+	@include tablet
+		@include fontsize(24px)
+		font-variant: none

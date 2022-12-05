@@ -1,0 +1,24 @@
+@import "../../styles/sizes"
+@import "../../styles/colors"
+@import "../../styles/mixins"
+
+.dense
+	font-size: 1em
+
+.container
+	aspect-ratio: 1 / 1
+	position: relative
+	z-index: 0
+	overflow: hidden
+	width: 100%
+	background-color: $color-grey
+	border-radius: $radius * 2
+	color: $color-white
+	@include tablet
+		aspect-ratio: 26 / 9
+		&.dense
+			aspect-ratio: 16 / 9
+
+	.image
+		&.dark
+			filter: brightness(70%)

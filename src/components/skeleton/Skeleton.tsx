@@ -1,5 +1,4 @@
 import styles from "./Skeleton.module.sass";
-import {Box} from "../box/Box";
 import classnames from "classnames";
 import React from "react";
 
@@ -25,9 +24,11 @@ export const Skeleton: React.FC<SkeletonProps> = (props) => {
     }
   }, [variant]);
 
+  const duration = Math.random()
+
   return (
-      <Box style={{...style, width, height}} className={classnames(className, styles.container, variantClassName)}>
+      <div style={{...style, width, height, animationDelay: `${duration}s`}} className={classnames(className, styles.container, variantClassName)}>
         {children}
-      </Box>
+      </div>
   );
 };

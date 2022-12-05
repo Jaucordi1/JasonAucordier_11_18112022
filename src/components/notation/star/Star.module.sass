@@ -1,0 +1,16 @@
+@import "../../../styles/colors"
+@import "../../../styles/mixins"
+
+.container
+	color: $color-secondary
+	&.filled
+		color: $color-primary
+	@include mobile-only
+		width: 15px
+		height: 15px
+	@include tablet-only
+		width: 22px
+		height: 22px
+	@include desktop-only
+		width: 30px
+		height: 30px

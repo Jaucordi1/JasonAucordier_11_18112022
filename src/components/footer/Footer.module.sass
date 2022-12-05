@@ -1,13 +1,21 @@
+@import "../../styles/mixins"
+@import "../../styles/sizes"
 @import "../../styles/colors"
 
 .container
+	@include column(center, center, nowrap, 0)
 	background-color: $color-black
 	color: $color-white
-	height: 209px
-	justify-content: center
-	align-items: center
+	@include mobile-only
+		padding: 60px 20px
+		@include fontsize(12px)
+	@include tablet
+		padding: 60px 20px 30px 20px
+	@include tablet-only
+		@include fontsize(18px)
+	@include desktop-only
+		@include fontsize(24px)
 
 	.logo
+		width: 122px
 		height: 40px
-		color: $color-white
-		fill: $color-white

@@ -1,0 +1,19 @@
+@use "sass:math"
+@import "../../styles/sizes"
+@import "../../styles/colors"
+@import "../../styles/mixins"
+
+.container
+	@include column(flex-end, flex-start, nowrap, 1)
+	@include fontsize(18px)
+	background-size: cover
+	aspect-ratio: 1 / 1
+	border-radius: $radius
+	color: $color-white
+	padding: $padding
+	width: 100%
+	text-decoration: inherit
+
+@include mobile-only()
+	.container
+		max-height: 255px

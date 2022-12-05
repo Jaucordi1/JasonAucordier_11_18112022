@@ -2,17 +2,18 @@
 
 @import "../../styles/sizes"
 @import "../../styles/colors"
+@import "../../styles/mixins"
 
 .container
-	$duration: 3s + random() * 1s
+	@include column(flex-start, stretch, nowrap, 0)
 	background-color: rgba($color-secondary, .5)
-	animation: FadeGrey $duration ease-in-out infinite
-	padding: $padding
+	animation: FadeGrey 3s ease-in-out infinite
+	padding: var(--padding)
 
 	&.text
 		border-radius: 0
 	&.rect
-		border-radius: $radius
+		border-radius: var(--radius)
 	&.circle
 		border-radius: 50%
 
